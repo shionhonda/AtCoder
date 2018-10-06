@@ -1,1 +1,1 @@
-My solutions for problems of [AtCoder](https://atcoder.jp).ß
+My solutions for problems of [AtCoder](https://atcoder.jp).

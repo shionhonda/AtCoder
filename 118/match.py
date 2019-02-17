@@ -16,7 +16,7 @@ def main():
     n = N
     ans = ''
     while n>1:
-        arr = [ a for a in A if D[n-costs[a-1]]==D[n]-1 ]
+        arr = [ a for a in A if  n-costs[a-1]>=0 and D[n-costs[a-1]]==D[n]-1 ]
         if len(arr)>0:
             a = max(arr)
             ans += str(a)

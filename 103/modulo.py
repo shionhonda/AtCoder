@@ -4,7 +4,7 @@ A = list(map(int, input().split()))
 def euclid(a, b):
     m = min(a,b)
     n = max(a,b)
-    if (n%m==0):
+    if n%m==0:
         return m
     else:
         return euclid(m, n%m)
@@ -12,7 +12,7 @@ def euclid(a, b):
 def lcm(X):
     a = X[0]
     for x in X[1:]:
-        a = a* x // euclid(a,x)
+        a = a * x // euclid(a,x)
     return a
 
 y = lcm(A)-1

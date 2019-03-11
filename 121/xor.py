@@ -1,21 +1,32 @@
 A, B = map(int, input().split())
 
-st = 1
-while st<B:
-    st*=2
-st = st//2
-
-
-ans = 0
-cur = st
-while cur>=1:
-    if B-cur<A:
-        cur = cur//2
-        continue
+def main():
+    d = B-A
+    if d==0:
+        return A
+    elif d==1:
+        return A^B
+    elif A%2==1:
+        if B%2==1:
+            if d%4==0:
+                return A
+            else:
+                return A^1
+        else:
+            if d%4==1:
+                return A^B
+            else:
+                return A^1^B
     else:
-        if (B-cur)%2==0:
-            ans += cur
-            B -= cur
-        cur = cur//2
+        if B%2==1:
+            if d%4==1:
+                return 1
+            else:
+                return 0
+        else:
+            if d%4==0:
+                return B
+            else:
+                return 1^B
 
-print(ans)
+print(main())

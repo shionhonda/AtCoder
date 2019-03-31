@@ -1,40 +1,22 @@
-import numpy as np
+N, K = map(int, input().split())
+A = list(map(int, input().split()))
 
-def binary_array(x, max_len):
-    x = bin(x)[2:]
-    x = '0' * (max_len - len(x)) + x
-    return [int(a) for a in list(x)]
+x = 0
+b = 1<<50 # From higer bit
+for _ in range(50):
+    b = b>>1
+    if x+b>K:
+        continue
 
-def main():
-    n, k = (int(x) for x in input().split())
-    a = [int(x) for x in input().split()]
-    if k==0:
-        print(sum(a))
-        return
-    
-    max_len = max(len(bin(max(a))), len(bin(k))) - 2
-    A = [binary_array(aa, max_len) for aa in a]
-    A = np.array(A)
-    k_array = np.array(binary_array(k, max_len))
+    cnt = 0
+    for a in A:
+        if a & b:
+            cnt += 1
+    if cnt < N/2:
+        x += b
 
-    s = []
-    K = 0
-    for i in range(len(k_array)):
-        K += 2**(max_len-1-i)
-        if K<=k:
-            tmp = np.sum(A[:,i])
-            s.append(max(tmp, n-tmp))
-        else:
-            s.append(np.sum(A[:,i]))
-            K -= 2**(max_len-1-i)
-        
+ans = 0
+for a in A:
+    ans += x^a
 
-    ans = 0
-    for i,ss in enumerate(s):
-        ans += 2**(max_len-1-i) * ss
-    print(ans)
-
-
-
-if __name__=='__main__':
-    main()
+print(ans)

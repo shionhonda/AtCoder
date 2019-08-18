@@ -9,14 +9,14 @@ for i,s in enumerate(S):
         s_dic[s] = [i]
     else:
         s_dic[s].append(i)
-        
+
 def main():
-    pre, n_repeat = 0, 0
-    cur = 0
+    pre, n_repeat = -1, 0
+    cur = -1
     for t in T:
         if t not in s_dic.keys():
             return -1
-        i = bisect.bisect_left(s_dic[t], cur)
+        i = bisect.bisect_right(s_dic[t], cur)
         if i >= len(s_dic[t]):
             cur = s_dic[t][0]
             n_repeat += 1
@@ -26,8 +26,6 @@ def main():
                 n_repeat += 1
         pre = cur
             
-        print(t, cur, n_repeat)
-    print(n_repeat, len(S), cur)
     return n_repeat * len(S) + cur + 1
 
 print(main())

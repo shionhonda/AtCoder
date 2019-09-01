@@ -4,10 +4,10 @@ class Node:
         self.parent = parent
         self.children = []
 
-    def add(self, n):
-        counter[self.id] += n
+    def add_all(self):
         for child in self.children:
-            child.add(n)
+            counter[child.id] += counter[self.id]
+            child.add_all()
 
 N, Q = map(int, input().split())
 tree = [None] * N
@@ -20,6 +20,7 @@ for i in range(N-1):
 
 for i in range(Q):
     p, x = map(int, input().split())
-    tree[p-1].add(x)
+    counter[p-1] += x
     
+tree[0].add_all()
 print(' '.join(list(map(str, counter))))

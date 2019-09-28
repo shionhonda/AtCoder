@@ -3,19 +3,22 @@ AC = []
 for _ in range(M):
     a, b = map(int, input().split())
     c_list = list(map(int, input().split()))
-    AC.append([a, sorted(c_list)])
+    AC.append([a, c_list])
 
 AC = sorted(AC, key=lambda x:x[0])
-print(AC)
-dp = [10**7]*M
-for m in M:
+dp = [10**9]*2**N # Nの有無の全組み合わせ
+dp[0] = 0
+for m in range(M):
     a, c_list = AC[m]
-    for i in range(m-1,-1,-1):
-        a_tmp, c_list_tmp = AC[m-1]
-        flg = True
-        for c in c_list_tmp:
-            if c not in c_list:
-                flg = False
-                break
-        if flg:
-            dp[m] = min(dp[m-1], )
+    c_bi = 0
+    for c in c_list:
+        c_bi += 2**(c-1)
+    for i in range(2**N):
+        # dp[i|c_bi]: iからコストaで行ける場所
+        dp[i|c_bi] = min(dp[i|c_bi], dp[i]+a) 
+
+ans = dp[-1]
+if ans > 10**8:
+    print(-1)
+else:
+    print(dp[-1])

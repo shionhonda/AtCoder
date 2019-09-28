@@ -20,8 +20,8 @@ def factorize(n):
     return arr
 
 def gcd(a,b):
-  while b!=0:
-    a,b=b,a%b
+  while b>0:
+    a, b = b, a%b
   return a
 
 D = gcd(A,B)
